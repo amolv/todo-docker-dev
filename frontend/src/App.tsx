@@ -1,14 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import HeaderComp from './components/header';
+import React from "react";
+
+import "./App.scss";
+import HeaderComp from "./components/header/header";
 
 function App() {
   return (
     <div className="App">
       <HeaderComp />
       <header className="App-header">
-        
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -18,7 +17,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React !!!!!!!!!!
+          Learn React !
         </a>
       </header>
     </div>

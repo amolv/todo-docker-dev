@@ -4,12 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TodoModule } from './todo/todo.module';
 
-
 @Module({
-  imports: [
-    MongooseModule.forRoot('mongodb://mongo:27017/todos'),
-    
-    TodoModule
-  ]  
+  imports: [MongooseModule.forRoot('mongodb://mongo:27017/todos'), TodoModule],
 })
 export class AppModule {}

@@ -7,35 +7,29 @@ export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @Get()
-  async getTodos(){
+  async getTodos() {
     return await this.todoService.getTodos();
-  } 
+  }
 
   @Get(':id')
-  async getTodoById(){
+  async getTodoById() {
     return await this.todoService.getTodos();
-  } 
+  }
 
   @Post()
-  async postTodos( @Body() newtodo :  TodoType){     
-    return await this.todoService.postTodo( newtodo );
+  async postTodos(@Body() newtodo: TodoType) {
+    return await this.todoService.postTodo(newtodo);
   }
-  
+
   @Delete()
-  async deleteTodos(){
-      const newtodo = { id : 1,
-       title : 'string',
-       status : 'string' }
-    return await this.todoService.postTodo( newtodo );
+  async deleteTodos() {
+    const newtodo = { id: 1, title: 'string', status: 'string' };
+    return await this.todoService.postTodo(newtodo);
   }
 
   @Put()
-  async editTodos(){
-      const newtodo = { id : 1,
-       title : 'string',
-       status : 'string' }
-    return await this.todoService.postTodo( newtodo );
+  async editTodos() {
+    const newtodo = { id: 1, title: 'string', status: 'string' };
+    return await this.todoService.postTodo(newtodo);
   }
-
-
 }
