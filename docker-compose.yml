@@ -22,14 +22,16 @@ services:
         volumes:
             - ./api:/usr/src/app
         depends_on:
-            - mongodb
-    mongodb:
+            - mongo
+    mongo:
         image: mongo
-        container_name: mongodb
+        container_name: mongodatabase
         ports:
             - 27017:27017
         networks:
             - todo-app
+        volumes:
+            - ./database/data:/data/db
 
 networks:
     todo-app:

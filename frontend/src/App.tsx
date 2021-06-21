@@ -1,10 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import HeaderComp from './components/header';
 
 function App() {
   return (
     <div className="App">
+      <HeaderComp />
       <header className="App-header">
         
         <p>
@@ -16,7 +18,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React and dockerrize!
+          Learn React !!!!!!!!!!
         </a>
       </header>
     </div>
