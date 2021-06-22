@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
+
 import { TodoType } from './interfaces/todo.interface';
 import { TodoService } from './todo.service';
 
@@ -7,29 +17,30 @@ export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @Get()
-  async getTodos() {
+  public async getTodos() {
     return await this.todoService.getTodos();
   }
 
   @Get(':id')
-  async getTodoById() {
+  public async getTodoById() {
     return await this.todoService.getTodos();
   }
 
   @Post()
-  async postTodos(@Body() newtodo: TodoType) {
+  public async postTodos(@Body() newtodo: TodoType) {
     return await this.todoService.postTodo(newtodo);
   }
 
-  @Delete()
-  async deleteTodos() {
-    const newtodo = { id: 1, title: 'string', status: 'string' };
-    return await this.todoService.postTodo(newtodo);
+  @Delete(':id')
+  public async deleteTodoById(@Param('id') id: string) {
+    return await this.todoService.deleteTodoById(id);
   }
 
-  @Put()
-  async editTodos() {
-    const newtodo = { id: 1, title: 'string', status: 'string' };
-    return await this.todoService.postTodo(newtodo);
+  @Put(':id')
+  public async putTodoById(@Param('id') id: string, @Body() body) {
+    console.log('query', id, body);
+    const title = body.title;
+    const completed = body.completed;
+    return await this.todoService.putTodoById(id, title, completed);
   }
 }

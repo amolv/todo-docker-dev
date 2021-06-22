@@ -1,7 +1,7 @@
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 
 export interface TodoType extends Document {
-     id : number;
-     title : string;
-     status : string;
+  id: string;
+  title: string;
+  completed: boolean;
 }

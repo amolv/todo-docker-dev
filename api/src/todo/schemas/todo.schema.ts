@@ -1,7 +1,6 @@
 // import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 // import { Document } from 'mongoose'
 
-
 // export type TodoDocument = Todo & Document;
 
 // @Schema()
@@ -19,7 +18,7 @@
 import * as mongoose from 'mongoose';
 
 export const TodoSchema = new mongoose.Schema({
-    id : Number,
-    title : String,
-    status : String
+  id: Number,
+  title: String,
+  completed: Boolean,
 });

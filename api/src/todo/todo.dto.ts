@@ -1,5 +1,5 @@
 export class TodoDto {
-  readonly id: number;
+  readonly id: string;
   readonly title: string;
-  readonly status: string;
+  readonly completed: boolean;
 }
