@@ -1,4 +1,6 @@
 .App {
+  width: 600px;
+  margin: 0 auto;
   .App-header {
     background-color: #818388;
     min-height: 10vh;
@@ -10,6 +12,19 @@
     color: white;
     .App-link {
       color: #fb8d61;
+    }
+  }
+  .todoStats {
+    display: flex;
+    margin: 10px 0;
+    justify-content: space-between;
+  }
+  form {
+    margin: 10px 0;
+    input {
+      padding: 5px;
+      margin: 5px;
+      width: 45%;
     }
   }
 }

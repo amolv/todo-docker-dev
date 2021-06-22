@@ -13,7 +13,6 @@ function App() {
   const notes = useSelector((state: RootStateOrAny) => state.ui.notifications);
 
   const todos = useSelector((state: RootStateOrAny) => state.todos.todos);
-  console.log("todosss", todos);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,25 +20,26 @@ function App() {
     onLoad = false;
   }, [dispatch]);
 
-  const updateTodos = (newTodo: ITodo) => {
-    //setTodos([...todos, newTodo]);
-  };
-
   return (
     <div className="App">
+      <header className="App-header">
+        <p>Todos</p>
+      </header>
+      <div className="todoStats">
+        <span>Total todos : {todos.length}</span>
+        <span>
+          Completed : {todos.filter((t: ITodo) => t.completed).length}
+        </span>
+      </div>
+      <TodoFormComp />
+      <div className="wrapper">
+        <TodoListComp todos={todos} />
+      </div>
       <Notifications
         title={notes.title}
         message={notes.message}
         status={notes.status}
       />
-      <header className="App-header">
-        <p>Todos</p>
-      </header>
-      <p>Total todos : {todos.length}</p>
-      <TodoFormComp updateTodos={updateTodos} />
-      <div className="wrapper">
-        <TodoListComp todos={todos} />
-      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ITodo } from "../types";
+import { current } from "@reduxjs/toolkit";
 
 interface TodosState {
   todos: ITodo[];
@@ -14,24 +15,25 @@ export const todosSlice = createSlice({
   initialState,
   reducers: {
     listTodos: (state, action) => {
-      console.log("listTodos ", state, action);
       return {
         ...state,
         todos: action.payload,
       };
     },
     completeTodoList: (state, action) => {
-      const updatedTodoList = [...state.todos];
-      updatedTodoList.map((t) => {
-        t.completed =
-          t.id === action.payload.id ? action.payload.completed : t.completed;
-        return t;
-      });
+      console.log(current(state), action);
+      const copyState = current(state);
+      const updatedTodoList = copyState.todos.map((t) => ({
+        ...t,
+        title: t.id === action.payload.id ? action.payload.title : t.title,
+        completed:
+          t.id === action.payload.id ? action.payload.completed : t.completed,
+      }));
+      console.log("updatedTodoList", updatedTodoList);
       return {
         ...state,
         todos: updatedTodoList,
       };
-      return state;
     },
     updateTodoList: (state, action) => {
       return {

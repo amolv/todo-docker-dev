@@ -1,10 +1,18 @@
 #todolist {
   background-color: aqua;
+  padding: 10px;
   .header {
-    display: flex;
+    li {
+      display: flex;
+    }
+
     span {
-      min-width: 200px;
       display: inline-block;
+      font-weight: 600;
+      width: 200px;
+      &:nth-child(2) {
+        width: 100px;
+      }
     }
   }
   ul.list {
@@ -12,8 +20,14 @@
       margin-bottom: 10px;
       list-style: auto;
       span {
-        min-width: 200px;
         display: inline-block;
+        width: 200px;
+        &:nth-child(2) {
+          width: 100px;
+        }
+        input {
+          padding: 5px;
+        }
       }
     }
   }

@@ -97,7 +97,7 @@ export const updateTodo = (todo: ITodo) => {
       body: JSON.stringify({
         id: todo.id,
         title: todo.title,
-        completed: true,
+        completed: todo.completed,
       }),
     };
     const sendRequest = async () => {
@@ -111,7 +111,13 @@ export const updateTodo = (todo: ITodo) => {
       const response = await sendRequest();
       const responseData = await response.json();
       if (responseData) {
-        dispatch(todosActions.completeTodoList(todo));
+        dispatch(
+          todosActions.completeTodoList({
+            ...todo,
+            title: todo.title,
+            completed: todo.completed,
+          })
+        );
       }
     } catch (error) {
       dispatch(

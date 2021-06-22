@@ -1,11 +1,8 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addNewTodo } from "../../store/todos-actions";
 
-type TodoFormCompProps = {
-  updateTodos: Function;
-};
-const TodoFormComp = (props: TodoFormCompProps) => {
+const TodoFormComp = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState<string>("");
 
@@ -14,18 +11,28 @@ const TodoFormComp = (props: TodoFormCompProps) => {
       setTitle(event.target.value);
     }
   };
-
-  const submitHandler = () => {
+  const createTodo = () => {
+    if (!title) return;
     dispatch(addNewTodo(title));
+    setTitle("");
+  };
+  const submitHandler = () => {
+    createTodo();
+  };
+  const formSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    createTodo();
   };
 
   return (
-    <form action="" className="">
+    <form action="" className="" onSubmit={formSubmitHandler}>
       <input
         type="text"
         name="title"
         placeholder="Task..."
+        value={title}
         onChange={handleChange}
+        autoComplete="off"
       />
       <input type="button" value="Add todo" onClick={submitHandler} />
     </form>

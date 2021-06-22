@@ -7,14 +7,14 @@ type TodoListCompProps = {
 };
 const TodoListComp = (props: TodoListCompProps) => {
   const todos = JSON.parse(JSON.stringify(props.todos));
-  console.log("new toods", todos);
 
   return (
     <div id="todolist">
       <ul className="header">
         <li>
-          <span>Title:</span>
-          <span>Status:</span>
+          <span>Title</span>
+          <span>Completed?</span>
+          <span>Action</span>
         </li>
       </ul>
 
