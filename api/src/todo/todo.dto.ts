@@ -1,10 +1,12 @@
-export class TodoDto {
-  readonly id: string;
-  readonly title: string;
-  readonly completed: boolean;
-}
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsNotEmpty, IsBooleanString } from 'class-validator';
 
 export class NewTodoDto {
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({ type: String, description: 'Todo Title' })
   readonly title: string;
+  @IsBooleanString()
+  @ApiProperty({ type: Boolean, description: 'Todo Completed?' })
   readonly completed: boolean;
 }

@@ -6,5 +6,7 @@ import { TodoModule } from './todo/todo.module';
 
 @Module({
   imports: [MongooseModule.forRoot('mongodb://mongo:27017/todos'), TodoModule],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
