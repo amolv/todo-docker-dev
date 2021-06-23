@@ -3,3 +3,8 @@ export class TodoDto {
   readonly title: string;
   readonly completed: boolean;
 }
+
+export class NewTodoDto {
+  readonly title: string;
+  readonly completed: boolean;
+}

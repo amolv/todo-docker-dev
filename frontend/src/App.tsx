@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Todos</p>
+        <p>TodoApp</p>
       </header>
       <div className="todoStats">
         <span>Total todos : {todos.length}</span>

@@ -1,8 +1,8 @@
 import { Model } from 'mongoose';
 import { Injectable, HttpException } from '@nestjs/common';
-import { TodoType } from './interfaces/todo.interface';
-import { TodoDto } from './todo.dto';
 import { InjectModel } from '@nestjs/mongoose';
+import { Todo, TodoDocument } from './schemas/todo.schema';
+import { NewTodoDto } from './todo.dto';
 
 const todoProjection = {
   __v: false,
@@ -11,11 +11,11 @@ const todoProjection = {
 @Injectable()
 export class TodoService {
   constructor(
-    @InjectModel('Todos')
-    private todoModel: Model<TodoType>,
+    @InjectModel(Todo.name)
+    private todoModel: Model<TodoDocument>,
   ) {}
 
-  public async getTodos(): Promise<TodoDto[]> {
+  public async getTodos(): Promise<Todo[]> {
     const todos = await this.todoModel.find({}, todoProjection).exec();
     if (!todos || !todos[0]) {
       throw new HttpException('Not Found', 404);
@@ -28,7 +28,7 @@ export class TodoService {
     }));
   }
 
-  public async postTodo(newTodo: TodoType) {
+  public async postTodo(newTodo: NewTodoDto) {
     const todo = await this.todoModel.create(newTodo);
     const t = await todo.save();
     return { id: t._id, title: t.title, completed: t.completed };
@@ -45,7 +45,7 @@ export class TodoService {
     id: string,
     newtitle: string,
     completedstatus: boolean,
-  ): Promise<TodoDto> {
+  ): Promise<Todo> {
     const todo = await this.todoModel
       .findOneAndUpdate(
         { _id: id },

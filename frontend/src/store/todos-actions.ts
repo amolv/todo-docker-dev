@@ -41,9 +41,14 @@ export const fetchTodos = () => {
     try {
       const response = await sendRequest();
       const responseData = await response.json();
-      console.log("responseData", responseData);
-
       dispatch(todosActions.listTodos(responseData));
+      dispatch(
+        uiAction.showNotificaion({
+          status: "success",
+          title: "Done..",
+          message: "Todos fecthed",
+        })
+      );
     } catch (error) {
       dispatch(
         uiAction.showNotificaion({
@@ -77,6 +82,13 @@ export const addNewTodo = (title: string) => {
       const response = await sendRequest();
       const responseData = await response.json();
       dispatch(todosActions.updateTodoList(responseData));
+      dispatch(
+        uiAction.showNotificaion({
+          status: "success",
+          title: "Done..",
+          message: "New Todo added...",
+        })
+      );
     } catch (error) {
       dispatch(
         uiAction.showNotificaion({
@@ -118,6 +130,13 @@ export const updateTodo = (todo: ITodo) => {
             completed: todo.completed,
           })
         );
+        dispatch(
+          uiAction.showNotificaion({
+            status: "success",
+            title: "Done..",
+            message: "Todo updated...",
+          })
+        );
       }
     } catch (error) {
       dispatch(
@@ -149,8 +168,13 @@ export const deleteTodo = (id: string) => {
       const responseData = await response.json();
       if (responseData) {
         dispatch(todosActions.updateTodoListAfterDelete(id));
-      } else {
-        // failed
+        dispatch(
+          uiAction.showNotificaion({
+            status: "success",
+            title: "Done..",
+            message: "Todo deleted...",
+          })
+        );
       }
     } catch (error) {
       dispatch(

@@ -9,7 +9,7 @@ import {
   Query,
 } from '@nestjs/common';
 
-import { TodoType } from './interfaces/todo.interface';
+import { NewTodoDto } from './todo.dto';
 import { TodoService } from './todo.service';
 
 @Controller('todos')
@@ -27,7 +27,7 @@ export class TodoController {
   }
 
   @Post()
-  public async postTodos(@Body() newtodo: TodoType) {
+  public async postTodos(@Body() newtodo: NewTodoDto) {
     return await this.todoService.postTodo(newtodo);
   }
 
