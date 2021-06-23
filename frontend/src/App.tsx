@@ -1,46 +1,49 @@
-import React, { useEffect } from "react";
 import "./App.scss";
 import Notifications from "./components/notifications/notification";
-import TodoFormComp from "./components/todoform";
-import TodoListComp from "./components/todolist";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-import { ITodo } from "./types";
-import { fetchTodos } from "./store/todos-actions";
+import { RootStateOrAny, useSelector } from "react-redux";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-let onLoad = true;
+import TodoPageComp from "./pages/todos-page";
 
 function App() {
   const notes = useSelector((state: RootStateOrAny) => state.ui.notifications);
 
-  const todos = useSelector((state: RootStateOrAny) => state.todos.todos);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (onLoad) dispatch(fetchTodos());
-    onLoad = false;
-  }, [dispatch]);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>TodoApp</p>
-      </header>
-      <div className="todoStats">
-        <span>Total todos : {todos.length}</span>
-        <span>
-          Completed : {todos.filter((t: ITodo) => t.completed).length}
-        </span>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <p>TodoApp</p>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/todos">Todos</Link>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <Switch>
+          <Route path="/about">This is about</Route>
+          <Route path="/todos">
+            <TodoPageComp />
+          </Route>
+          <Route path="/">
+            <p>Welcome to home!</p>
+          </Route>
+        </Switch>
+
+        <Notifications
+          title={notes.title}
+          message={notes.message}
+          status={notes.status}
+        />
       </div>
-      <TodoFormComp />
-      <div className="wrapper">
-        <TodoListComp todos={todos} />
-      </div>
-      <Notifications
-        title={notes.title}
-        message={notes.message}
-        status={notes.status}
-      />
-    </div>
+    </Router>
   );
 }
 
